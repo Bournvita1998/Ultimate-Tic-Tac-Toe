@@ -9,12 +9,12 @@ LOW_POS = [(0,1),(0,2),(1,0),(1,3),(2,0),(2,3),(3,1),(3,2)]
 class Player7:
 
 	def __init__(self):
-		#print "entry 1"
 		self.ALPHA = -100000000
 		self.BETA = 100000000
+                self.dict = {}
+                self.lenght = 0
 
 	def minimax(self,old_move, depth, max_depth, alpha, beta, isMax, p_board, p_block, flag1, flag2, best_node):
-		#print "entry2"
 		if depth==max_depth:
 			utility = self.check_utility(p_block,p_board)
 			if flag1 == 'o':
@@ -65,84 +65,93 @@ class Player7:
 			flag2 = 'o'
 		else :
 			flag2 = 'x'
-		(utility_value, best_node) = self.minimax(old_move,0,3,self.ALPHA,self.BETA,True,board, (1,1), flag1, flag2, (7,7))
-		return best_node
+		(utility_value, best_node) = self.minimax(old_move,0,5,self.ALPHA,self.BETA,True,board, (1,1), flag1, flag2, (7,7))
+                return best_node
 
 	def block_utility(self,block,value,flag):
-		ans = 0
-		for pos in HIGH_POS:
-			if block[pos[0]][pos[1]]==flag:
-				ans += value*2
+                block_1 = tuple([tuple(block[i]) for i in range(4)])
+                ans = 0
+                if (block_1, flag) not in self.dict:
+                        #print "entry"
+                        for pos in HIGH_POS:
+                                if block[pos[0]][pos[1]]==flag:
+                                        ans += value*2
 
-		for pos in LOW_POS:
-			if block[pos[0]][pos[1]]==flag:
-				ans += value
+                        for pos in LOW_POS:
+                                if block[pos[0]][pos[1]]==flag:
+                                        ans += value
 
-		if flag == 'x':
-			flag2 = 'o'
-		else:
-			flag2 = 'x'
+                        if flag == 'x':
+                                flag2 = 'o'
+                        else:
+                                flag2 = 'x'
+                        for row in range(4):
+                                countflag = 0
+                                opponentflag = 0
+                                for col in range(4):
+                                        if(block[row][col] == flag):
+                                                countflag += 1
+                                        elif(block[row][col] == flag2):
+                                                opponentflag += 1
+                                if opponentflag == 0:
+                                        if countflag == 2:
+                                                ans += value*10
+                                        elif countflag == 3:
+                                                ans += value*40
+                                        elif countflag == 4:
+                                                ans += value*100
 
-		for row in range(4):
-			countflag = 0
-			opponentflag = 0
-			for col in range(4):
-				if(block[row][col] == flag):
-					countflag += 1
-				elif(block[row][col] == flag2):
-					opponentflag += 1
-			if opponentflag == 0:
-				if countflag == 2:
-					ans += 10*value
-				elif countflag == 3:
-					ans += 40*value
-				elif countflag == 4:
-					ans += 100*value
+                        for col in range(4):
+                                countflag = 0
+                                opponentflag = 0
+                                for row in range(4):
+                                        if(block[row][col] == flag):
+                                                countflag += 1
+                                        elif(block[row][col] == flag2):
+                                                opponentflag += 1
+                                if opponentflag == 0:
+                                        if countflag == 2:
+                                                ans += value*10
+                                        elif countflag == 3:
+                                                ans += value*40
+                                        elif countflag == 4:
+                                                ans += value*100
 
-		for col in range(4):
-			countflag = 0
-			opponentflag = 0
-			for row in range(4):
-				if(block[row][col] == flag):
-					countflag += 1
-				elif(block[row][col] == flag2):
-					opponentflag += 1
-			if opponentflag == 0:
-				if countflag == 2:
-					ans += 10*value
-				elif countflag == 3:
-					ans += 40*value
-				elif countflag == 4:
-					ans += 100*value
+                        countflag = 0
+                        opponentflag = 0
+                        for diag in range(4):
+                                if(block[diag][diag] == flag):
+                                        countflag += 1
+                                elif(block[row][col] == flag2):
+                                        opponentflag += 1
+                        if opponentflag == 0:
+                                if countflag == 2:
+                                        ans += value*10
+                                elif countflag == 3:
+                                        ans += value*40
+                                elif countflag == 4:
+                                        ans += value*100
 
-		countflag = 0
-		opponentflag = 0
-		for diag in range(4):
-			if(block[diag][diag] == flag):
-				countflag += 1
-			elif(block[row][col] == flag2):
-				opponentflag += 1
-		if opponentflag == 0:
-			if countflag == 2:
-				ans += 10*value
-			elif countflag == 3:
-				ans += 40*value
-			elif countflag == 4:
-				ans += 100*value
+                        countflag = 0
+                        opponentflag = 0
+                        for diag in range(4):
+                                if(block[diag][3-diag] == flag):
+                                        countflag += 1
+                                elif(block[row][col] == flag2):
+                                        opponentflag += 1
+                        if opponentflag == 0:
+                                if countflag == 2:
+                                        ans += value*10
+                                elif countflag == 3:
+                                        ans += value*40
+                                elif countflag == 4:
+                                        ans += value*100
+                        #print ans
+                        self.dict[(block_1, flag)] = ans 
+                        #print self.dict
+                        return self.dict[(block_1, flag)] 
 
-		countflag = 0
-		opponentflag = 0
-		for diag in range(4):
-			if(block[diag][3-diag] == flag):
-				countflag += 1
-			elif(block[row][col] == flag2):
-				opponentflag += 1
-		if opponentflag == 0:
-			if countflag == 2:
-				ans += 10*value
-			elif countflag == 3:
-				ans += 40*value
-			elif countflag == 4:
-				ans += 100*value
-
-		return ans
+                        
+                else :
+                        #print "copy found"
+		        return self.dict[(block_1, flag)] 
