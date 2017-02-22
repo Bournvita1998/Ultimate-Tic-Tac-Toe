@@ -52,12 +52,16 @@ class Player7:
 
 	def check_utility(self,block,board) :
 		ans = 0
+		ans += 100*self.block_utility(board.block_status, 1, 'x')
+		ans -= 100*self.block_utility(board.block_status, 1, 'o')
+
 		temp_block = []
 		for i in range(0,4):
 			for j in range(0,4):
-				temp_block = [[board.board_status[4*i+k][4*j+l] for l in range(0,4)] for k in range(0,4)]
-		 		ans += self.block_utility(temp_block,1,'x')
-		 		ans -= self.block_utility(temp_block,1,'o')
+				if(board.block_status[i][j] == '-'):
+					temp_block = [[board.board_status[4*i+k][4*j+l] for l in range(0,4)] for k in range(0,4)]
+		 			ans += self.block_utility(temp_block,1,'x')
+		 			ans -= self.block_utility(temp_block,1,'o')
 		return ans
 
 	def move(self,board,old_move,flag1) :
@@ -91,7 +95,7 @@ class Player7:
                                 for col in range(4):
                                         if(block[row][col] == flag):
                                                 countflag += 1
-                                        elif(block[row][col] == flag2):
+                                        elif((block[row][col] == flag2) or (block[row][col] == 'd')):
                                                 opponentflag += 1
                                 if opponentflag == 0:
                                         if countflag == 2:
@@ -107,7 +111,7 @@ class Player7:
                                 for row in range(4):
                                         if(block[row][col] == flag):
                                                 countflag += 1
-                                        elif(block[row][col] == flag2):
+                                        elif((block[row][col] == flag2) or (block[row][col] == 'd')):
                                                 opponentflag += 1
                                 if opponentflag == 0:
                                         if countflag == 2:
@@ -122,7 +126,7 @@ class Player7:
                         for diag in range(4):
                                 if(block[diag][diag] == flag):
                                         countflag += 1
-                                elif(block[row][col] == flag2):
+                                elif((block[row][col] == flag2) or (block[row][col] == 'd')):
                                         opponentflag += 1
                         if opponentflag == 0:
                                 if countflag == 2:
@@ -137,7 +141,7 @@ class Player7:
                         for diag in range(4):
                                 if(block[diag][3-diag] == flag):
                                         countflag += 1
-                                elif(block[row][col] == flag2):
+                                elif((block[row][col] == flag2) or (block[row][col] == 'd')):
                                         opponentflag += 1
                         if opponentflag == 0:
                                 if countflag == 2:
@@ -147,11 +151,11 @@ class Player7:
                                 elif countflag == 4:
                                         ans += value*100
                         #print ans
-                        self.dict[(block_1, flag)] = ans 
+                        self.dict[(block_1, flag)] = ans
                         #print self.dict
-                        return self.dict[(block_1, flag)] 
+                        return self.dict[(block_1, flag)]
 
-                        
+
                 else :
                         #print "copy found"
-		        return self.dict[(block_1, flag)] 
+		        return self.dict[(block_1, flag)]
