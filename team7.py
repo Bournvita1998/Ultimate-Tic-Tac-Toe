@@ -91,9 +91,9 @@ class Player7:
 					opponentflag += 1
 			if opponentflag == 0:
 				if countflag == 2:
-					ans += 3*value
+					ans += 20*value
 				elif countflag == 3:
-					ans += 4*value
+					ans += 30*value
 
 		for col in range(4):
 			countflag = 0
@@ -105,9 +105,9 @@ class Player7:
 					opponentflag += 1
 			if opponentflag == 0:
 				if countflag == 2:
-					ans += 4*value
+					ans += 20*value
 				elif countflag == 3:
-					ans += 10*value
+					ans += 30*value
 
 		countflag = 0
 		opponentflag = 0
@@ -118,9 +118,9 @@ class Player7:
 				opponentflag += 1
 		if opponentflag == 0:
 			if countflag == 2:
-				ans += 4*value
+				ans += 20*value
 			elif countflag == 3:
-				ans += 10*value
+				ans += 40*value
 
 		countflag = 0
 		opponentflag = 0
@@ -131,8 +131,8 @@ class Player7:
 				opponentflag += 1
 		if opponentflag == 0:
 			if countflag == 2:
-				ans += 4*value
+				ans += 20*value
 			elif countflag == 3:
-				ans += 10*value
+				ans += 40*value
 
 		return ans
