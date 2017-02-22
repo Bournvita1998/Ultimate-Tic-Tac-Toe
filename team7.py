@@ -76,7 +76,63 @@ class Player7:
 		for pos in HIGH_POS:
 			if block[pos[0]][pos[1]]==flag:
 				ans += value*2
+
 		for pos in LOW_POS:
 			if block[pos[0]][pos[1]]==flag:
 				ans += value
+
+		for row in range(4):
+			countflag = 0
+			opponentflag = 0
+			for col in range(4):
+				if(block[row][col] == flag):
+					countflag += 1
+				else:
+					opponentflag += 1
+			if opponentflag == 0:
+				if countflag == 2:
+					ans += 3*value
+				elif countflag == 3:
+					ans += 4*value
+
+		for col in range(4):
+			countflag = 0
+			opponentflag = 0
+			for row in range(4):
+				if(block[row][col] == flag):
+					countflag += 1
+				else:
+					opponentflag += 1
+			if opponentflag == 0:
+				if countflag == 2:
+					ans += 4*value
+				elif countflag == 3:
+					ans += 10*value
+
+		countflag = 0
+		opponentflag = 0
+		for diag in range(4):
+			if(block[diag][diag] == flag):
+				countflag += 1
+			else:
+				opponentflag += 1
+		if opponentflag == 0:
+			if countflag == 2:
+				ans += 4*value
+			elif countflag == 3:
+				ans += 10*value
+
+		countflag = 0
+		opponentflag = 0
+		for diag in range(4):
+			if(block[diag][3-diag] == flag):
+				countflag += 1
+			else:
+				opponentflag += 1
+		if opponentflag == 0:
+			if countflag == 2:
+				ans += 4*value
+			elif countflag == 3:
+				ans += 10*value
+
 		return ans
