@@ -1,7 +1,6 @@
 from simulator import *
 import random
 
-
 HIGH_POS = [(0,0),(1,1),(2,2),(3,3),(0,3),(1,2),(2,1),(3,0)]
 LOW_POS = [(0,1),(0,2),(1,0),(1,3),(2,0),(2,3),(3,1),(3,2)]
 
@@ -22,6 +21,7 @@ class Player7:
 			return (utility,old_move)
 		else:
 			children_list = p_board.find_valid_move_cells(old_move)
+			random.shuffle(children_list)
 			if len(children_list) == 0:
 				utility = self.check_utility(p_block,p_board)
 				if flag1 == 'o':
@@ -135,7 +135,6 @@ class Player7:
                                         ans += value*40
                                 elif countflag == 4:
                                         ans += value*100
-
                         countflag = 0
                         opponentflag = 0
                         for diag in range(4):
