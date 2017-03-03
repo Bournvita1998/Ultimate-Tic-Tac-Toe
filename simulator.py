@@ -194,6 +194,7 @@ def gameplay(obj1, obj2):				#game simulator
 			pts2 = 16
 			break
 		except Exception as e:
+			#print "1 " + str(e)
 			WINNER = 'P2'
 			MESSAGE = 'INVALID MOVE'
 			pts2 = 16			
@@ -210,6 +211,7 @@ def gameplay(obj1, obj2):				#game simulator
 			# children_list = game_board.find_valid_move_cells(old_move)
 			# for child in children_list :
 			# 	print child
+			# print "2 p1 => " + str(p1_move) + " ; old => " + str(old_move)  
 			WINNER = 'P2'
 			MESSAGE = 'INVALID MOVE'
 			pts2 = 16
