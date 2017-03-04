@@ -12,38 +12,4 @@ Made by - Harshit Patni
 
 Gameplay -
 
-| ==============Board State==============  
-
-| x o o o  - - x x  - o x -  x x x x  
-| - o - -  o - x -  - o x -  - x - o  
-| - o x -  o o x -  x o o o  o o - o  
-| - o - x  - - o -  - o - -  - - - o  
-
-| x x x -  o x - -  o - - -  x x o -  
-| o o - o  x x - x  x - - x  - x - -  
-| - - - -  o o o o  o - o o  - x - -  
-| - - - x  - - - -  - - x -  o x o o  
-
-| - - - x  - - o x  o o o -  - - x x  
-| - - x o  - - o -  - x - -  - - x -  
-| - x - -  - x o -  - x - -  - x o -  
-| o o o x  o o o x  x o x x  x - x -  
-
-| - - o o  x - - -  x - x -  - - - o  
-| - - o x  x - o -  - x - x  o o - o  
-| - - x o  x - - -  x - - -  x x x x  
-| x x - -  x - - -  o o o -  - - - o  
-
-| ==============Block State==============  
-| o - o x  
-| - o - x  
-| - o - x  
-| - x - x  
-| =======================================  
-
-
-| Winner: P1
-| Message WON
-| x: 5  o: 4  d: 0
-| Player 1 points: 16
-| Player 2 points: 0
+| Check game.log file to see sample gameplay.
